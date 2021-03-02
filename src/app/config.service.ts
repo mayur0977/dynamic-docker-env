@@ -16,11 +16,17 @@ export class ConfigService {
   constructor(public http: HttpClient) {}
 
   loadConfig() {
-    return this.http.get<ConfigModel>('./assets/config.json').pipe(
+    let url ='./assets/config.json';
+    let azueeFileUrl= "https://quaerisusermgmt.blob.core.windows.net/environment-files/environment.json?sp=r&st=2021-02-23T07:15:05Z&se=2021-03-31T15:15:05Z&sv=2020-02-10&sr=b&sig=1yD3MGcjHCovUz8hbEtfXn1ztEO3sdJie5AEvC8yYkY%3D";
+
+    return this.http.get<ConfigModel>(azueeFileUrl).pipe(
       map((config) => {
+        console.log("config",config);
+        
         this.configSnapshot = config;
         this.configSubject$.next(config);
       })
     );
   }
+
 }
