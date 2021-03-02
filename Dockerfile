@@ -25,7 +25,7 @@ COPY nginx.conf /etc/nginx/conf.d/default.conf
 RUN rm -rf /usr/share/nginx/html/*
 
 ## From 'builder' stage copy over the artifacts in dist folder to default nginx public folder
-COPY --from=builder /app/dist/angular-docker /usr/share/nginx/html
+COPY --from=builder /app/dist/env-loader /usr/share/nginx/html
 
 COPY ["entrypoint.sh", "/entrypoint.sh"]
 CMD ["sh", "/entrypoint.sh"]
